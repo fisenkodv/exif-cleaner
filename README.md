@@ -21,6 +21,12 @@ virtualenv venv
 source venv/bin/activate
 ```
 
+or in *Windows*
+
+```bash
+source venv/Scripts/activate
+```
+
 - Install dependencies
 
 ```bash
