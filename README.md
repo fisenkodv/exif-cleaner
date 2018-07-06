@@ -1,4 +1,3 @@
-
 # Exif Cleaner
 
 ## Create Environment
@@ -39,6 +38,6 @@ pip install -r requirements.txt
 deactivate
 ```
 
-# Licence
+## Licence
 
 MIT

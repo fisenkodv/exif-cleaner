@@ -1,10 +1,11 @@
 {
-  "python.pythonPath": "D:\\Projects\\VS\\Personal\\exif-cleaner\\venv\\Scripts\\python.exe",
+  "python.pythonPath": "${workspaceFolder}/venv/bin/python",
   "cSpell.words": [
     "Exif",
     "exifread",
     "isdir",
     "venv",
-    "virtualenv"
+    "virtualenv",
+    "xmpfile"
   ]
 }
