@@ -13,6 +13,7 @@ class GeotagKeywordsCleaner(object):
     def cleanup(self):
         files = self.get_files(self.source_photos_path, ['jpg', 'jpeg'])
         for file_path in files:
+            print('Reading %s' % file_path)
             self.get_tags_from_xmp(file_path)
         return
 
@@ -24,12 +25,13 @@ class GeotagKeywordsCleaner(object):
             property_was_removed |= self.remove_geo_xmp_property(
                 xmp, consts.XMP_NS_DC, 'subject[%s]' % (index))
         if property_was_removed:
+            print('Updating %s' % file_path)
             xmpfile.put_xmp(xmp)
         xmpfile.close_file()
         return
 
     def remove_geo_xmp_property(self, xmp, ns, property_name):
-        if(xmp.does_property_exist(ns, property_name)):
+        if xmp is not None and xmp.does_property_exist(ns, property_name):
             property = xmp.get_property(ns, property_name)
             if isinstance(property, basestring) and property.find('geo') != -1:
                 xmp.delete_property(ns, property_name)
@@ -45,12 +47,15 @@ class GeotagKeywordsCleaner(object):
             if os.path.isdir(item_dir):
                 file_list += self.get_files(item_dir, extension)
             else:
-                if '*' in extension or self.get_file_extension(item_dir) in extension:
+                if '*' in extension or self.get_file_extension(item_dir) in extension and self.is_ascii(item_dir):
                     file_list.append(item_dir)
         return file_list
 
     def get_file_extension(self, path):
         return os.path.splitext(path)[1][1:].strip()
+
+    def is_ascii(self, s):
+        return all(ord(c) < 128 for c in s)
 
 
 if __name__ == '__main__':
