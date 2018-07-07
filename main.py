@@ -21,7 +21,7 @@ class GeotagKeywordsCleaner(object):
         xmpfile = XMPFiles(file_path=file_path, open_forupdate=True)
         xmp = xmpfile.get_xmp()
         property_was_removed = False
-        for index in range(5, 1, -1):
+        for index in range(5, 0, -1):
             property_was_removed |= self.remove_geo_xmp_property(
                 xmp, consts.XMP_NS_DC, 'subject[%s]' % (index))
         if property_was_removed:
@@ -59,8 +59,7 @@ class GeotagKeywordsCleaner(object):
 
 
 if __name__ == '__main__':
-    # input('Source path: ') or 'D://documents//'
-    source_photos_path = '/Volumes/home/Drive/Moments/Photo'
+    source_photos_path = input('Source path: ')
     if source_photos_path:
         cataloguer = GeotagKeywordsCleaner(source_photos_path)
         cataloguer.cleanup()
