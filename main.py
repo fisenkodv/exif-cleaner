@@ -59,7 +59,7 @@ class GeotagKeywordsCleaner(object):
 
 
 if __name__ == '__main__':
-    source_photos_path = input('Source path: ')
+    source_photos_path = input('Source path: ') or ''
     if source_photos_path:
         cataloguer = GeotagKeywordsCleaner(source_photos_path)
         cataloguer.cleanup()
